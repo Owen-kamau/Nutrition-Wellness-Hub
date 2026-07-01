@@ -49,6 +49,28 @@ return [
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
+        'gmail' => [
+            'transport' => 'smtp',
+            'scheme' => env('MAIL_GMAIL_SCHEME', 'smtp'),
+            'host' => env('MAIL_GMAIL_HOST', 'smtp.gmail.com'),
+            'port' => env('MAIL_GMAIL_PORT', 587),
+            'username' => env('MAIL_GMAIL_USERNAME'),
+            'password' => env('MAIL_GMAIL_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
+        'outlook' => [
+            'transport' => 'smtp',
+            'scheme' => env('MAIL_OUTLOOK_SCHEME', 'smtp'),
+            'host' => env('MAIL_OUTLOOK_HOST', 'smtp.office365.com'),
+            'port' => env('MAIL_OUTLOOK_PORT', 587),
+            'username' => env('MAIL_OUTLOOK_USERNAME'),
+            'password' => env('MAIL_OUTLOOK_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],
@@ -82,7 +104,8 @@ return [
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
-                'smtp',
+                'gmail',
+                'outlook',
                 'log',
             ],
             'retry_after' => 60,
